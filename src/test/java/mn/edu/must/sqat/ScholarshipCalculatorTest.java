@@ -1,6 +1,8 @@
 package mn.edu.must.sqat;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,6 +28,17 @@ class ScholarshipCalculatorTest {
     @Test
     void gradeRejectsAbove100() {
         assertThrows(IllegalArgumentException.class, () -> calculator.letterGrade(101));
+    }
+
+    @Test
+    void gradeAt60() {
+        assertEquals("D", calculator.letterGrade(60));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"59.99, F", "69.99, D", "0, F", "100, A", "89.99, B", "90, A"})
+    void gradeAtOtherBoundaries(double score, String expected) {
+        assertEquals(expected, calculator.letterGrade(score));
     }
 
     @Test

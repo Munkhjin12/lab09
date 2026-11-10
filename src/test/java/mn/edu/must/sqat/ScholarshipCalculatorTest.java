@@ -49,6 +49,16 @@ class ScholarshipCalculatorTest {
     }
 
     @Test
+    void gpaWithOneScore() {
+        assertEquals(4.0, calculator.gpa(new double[]{95}));
+    }
+
+    @Test
+    void gpaWithMultipleScores() {
+        assertEquals(2.5, calculator.gpa(new double[]{95, 85, 75, 65}));
+    }
+
+    @Test
     void scholarship100() {
         assertEquals(100, calculator.scholarship(3.9, 16, false));
     }
